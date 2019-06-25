@@ -1,0 +1,37 @@
+<html>
+    <body>
+        <div>
+            <h1>Input text</h1>
+            <textarea rows="10" cols="100" id="inputText">
+
+            </textarea>
+            <br>
+            <button type="submit" id="submitButton">
+                Get summary
+            </button>
+            <br>
+        </div>
+        <div>
+            <h1>Output text</h1>
+            <textarea rows="10" cols="100" id="outputText" readonly></textarea>
+        </div>
+        <script>
+            document.getElementById("inputText").value = "";
+            button = document.getElementById("submitButton");
+            button.onclick = function () {
+                let inputText = document.getElementById("inputText").value;
+                let xhr = new XMLHttpRequest();
+                xhr.open('POST', '/', true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.onreadystatechange = function() { // Call a function when the state changes.
+                    if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                    // Request finished. Do processing here.
+                        document.getElementById("outputText").value = this.responseText;
+                    }
+                };
+                xhr.send(inputText);
+                console.log("message sent " + inputText);
+            }
+        </script>
+    </body>
+</html>
