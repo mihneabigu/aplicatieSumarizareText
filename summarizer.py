@@ -3,6 +3,7 @@ import math
 from nltk.corpus import stopwords
 import numpy as np
 import networkx as nx
+import matplotlib.pyplot as plt
 import operator
 
 #Remove stopwords (like "the" or "is") from a sentence
@@ -43,7 +44,7 @@ def summarize(text):
 
     #The number of sentences to be printed out for the summary
 
-    TOP_RANKED = 5
+    TOP_RANKED = 7
 
     # Separate the text into sentences and return them in an array of sentences
 
@@ -87,6 +88,10 @@ def summarize(text):
             if i != j:
                 similarityMatrix[i][j] = cosineSimilarity(sentenceVectors[i], sentenceVectors[j])
 
+    # graph = nx.from_numpy_array(similarityMatrix)
+    # nx.draw_networkx(graph)
+    # plt.show()
+
     # Construct the finalScores
     # For each sentence, we calculate the sum of the incoming edges score
 
@@ -125,5 +130,5 @@ def summarize(text):
 # file = open("text.txt")
 # text = file.read()
 # file.close()
-
-#summarize(text)
+#
+# summarize(text)
